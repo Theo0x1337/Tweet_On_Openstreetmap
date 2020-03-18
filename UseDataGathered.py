@@ -46,24 +46,7 @@ class UseDataGathered:
       city = location.raw['address']['county']    # recuperation de la ville associee
       return city
   
-    
-    def getCoordByCity(self,city):
-        coords = []
-        location = self.nominatim.geocode(city)
-        coords = [location.latitude,location.longitude]
-        
-        return coords
-  
-    
-    def getBox(self,city):
-        location = self.nominatim.geocode(city)
-        box = location.raw['boundingbox']
-        box = [float(i) for i in box]
-        return box
-
-
-
-
+            
     def estDansBox(self, box = [], coords = ()) :
         """
         Permet de savoir les coordonnees en parametre
@@ -81,7 +64,59 @@ class UseDataGathered:
 
         return estBox
 
-                
+        
+    def getCoordCentreVille(self,box,centreVille):
+        coordsTweetCentreVille = []
+        try:
+            import json
+        except ImportError:
+            import simplejson as json
+        
+        # We use the file saved from last step as example
+        tweets_filename = 'test_data_twitter.txt'
+        tweets_file = open(tweets_filename, "r")
+        
+        
+        with open(tweets_filename) as tfn:
+                tweet = json.load(tfn)
+        
+        for i in range(0,len(tweet)):
+            if tweet[i].get('geo') != None :
+                if self.estDansBox(box,tweet[i]['geo']['coordinates']):
+                    coordsTweetCentreVille.append([centreVille,tweet[i]['id'],tweet[i]['user']['name']])
+                else:
+                    coordsTweetCentreVille.append([tweet[i]['geo']['coordinates'],tweet[i]['id'],tweet[i]['user']['name']])
+            else:
+                if tweet[i]['place'] != None:
+                    coordsTweetCentreVille.append([self.getCoordCity(tweet[i]['place']['full_name']),tweet[i]['id'],tweet[i]['user']['name']])
+        return coordsTweetCentreVille
+    
+    
+    def getCoordCity(self,city):
+        location = self.nominatim.geocode(city, True, 30)
+        return ([location.latitude, location.longitude])
+        
+    
+    
+    def getContentTweet(self,tweets_filename):
+        try:
+            import json
+        except ImportError:
+            import simplejson as json
+        
+        # We use the file saved from last step as example
+        tweets_file = open(tweets_filename, "r")
+        
+        
+        with open(tweets_filename) as tfn:
+                tweet = json.load(tfn)
+        
+        content = ""
+        
+        for i in range(0,len(tweet)):
+
+            content = content + (tweet[i]['text']+" ")     
             
-
-
+        return content 
+        
+        
