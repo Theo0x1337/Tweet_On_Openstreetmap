@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Mon Mar 16 16:40:06 2020
+Created on Mon Mar 02 16:40:06 2020
 
 @author: bernardintheo
 """
@@ -33,7 +33,7 @@ class Main:
     stream.filter(locations=[-5.45,41.26,9.87,51.27])
     
     
-    search_results = api.search(geocode="48.6833,6.2,10km", count=100)
+    search_results = api.search(geocode="48.6833,6.2,10km", count=500)
     
     with open('data_twitter_search.txt','a') as tfs:
         for i in search_results:
@@ -89,5 +89,8 @@ class Main:
     
     kw = KeyWordCity(content_tweet_city)
     tabWords = kw.getKeywordsCity()
+    
+    
+    print("Les 10 mots les plus cités dans la ville que vous avez choisie sont : ")
     
     tenKeywords = kw.get10TopKeyWords(tabWords)

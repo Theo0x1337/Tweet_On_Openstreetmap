@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Tue Mar 17 22:17:36 2020
+Created on Tue Mar 03 22:17:36 2020
 
 @author: bernardintheo
 """
@@ -35,7 +35,7 @@ class KeyWordCity :
         new_sentence = ""
                  
         for word in words:
-            if word not in ['RT','https','t','co','le','que','on','ça','a','T ','T','J','J ']:
+            if word not in ['RT','https','t','co','le','que','on','ça','a','T ','T','J','J ','Je','je','va']:
                 if word not in stop_words:
                     new_sentence = new_sentence +" "+ word
          
@@ -47,7 +47,7 @@ class KeyWordCity :
     
     def get10TopKeyWords(self,tabWord):
         allWordDist = FreqDist(tabWord)
-        allWordDist.plot(20)
+        allWordDist.plot(10)
         
     
         
