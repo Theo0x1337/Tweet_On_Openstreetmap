@@ -17,10 +17,10 @@ class Main:
     
     
     #different token to make request thanks to tweepy
-    access_token = '1159875631670280201-XFBPMULm4RxzvybEwSmGC60FDl3R3e'
-    access_token_secret = 'J48Oixymj0DmQ9xy5UsEugkZr3amJ1WvoN27XakOPtCf5'
-    consumer_key = '2BAaR711Mz6rTzkBQKgACVXUl'
-    consumer_secret = 'eCFxVBntV9ebhC9yuqdDy2LNvaRHzEMHbFNcVyiNRRS2DOaVQe'
+    access_token = 'YOUR TOKEN HERE'
+    access_token_secret = 'YOUR TOKEN HERE'
+    consumer_key = 'YOUR TOKEN HERE'
+    consumer_secret = 'YOUR TOKEN HERE'
     
     #using our credential to instantiate a connection with tweepy
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
